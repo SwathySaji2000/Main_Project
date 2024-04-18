@@ -1,0 +1,140 @@
+{% include 'cart_header.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product Display</title>
+        <style>
+            /* Light theme color */
+            body {
+                background-color: #f8f9fa; /* Light gray background */
+                color: #333; /* Dark gray text color */
+                font-family: Arial, sans-serif; /* Use a common font family */
+            }
+    
+            /* Container styles */
+            .container {
+                max-width: 1200px; /* Limit container width */
+                margin: 0 auto; /* Center container horizontally */
+                padding: 20px; /* Add padding */
+                display: flex; /* Use flexbox for layout */
+                flex-wrap: wrap; /* Allow wrapping for multiple rows */
+                justify-content: space-between; /* Distribute items evenly along the main axis */
+            }
+    
+            /* Add some style for category buttons */
+            .category-button {
+                background-color: #CB0F31; /* Red button background */
+                color: #fff; /* White text color */
+                border: none;
+                padding: 10px 20px; /* Increased padding for better visibility */
+                cursor: pointer;
+                text-align: center; /* Center align text */
+                transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background color and transform */
+                border-radius: 20px; /* Rounded button */
+                margin-bottom: 10px; /* Bottom margin */
+                margin-right: 10px; /* Right margin between buttons */
+            }
+    
+            .category-button:hover {
+                background-color: #9b0824; /* Dark red background on hover */
+                transform: scale(1.05); /* Scale up slightly on hover for a more interactive effect */
+            }
+    
+            /* Product styles */
+            .product {
+                border: 1px solid #ddd; /* Light gray border */
+                padding: 20px;
+                background-color: #fff; /* White background */
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+                transition: box-shadow 0.3s ease; /* Smooth transition */
+                width: calc(33.33% - 40px); /* Set width for 3 products per row */
+                box-sizing: border-box; /* Include padding and border in width */
+                cursor: pointer; /* Change cursor to pointer */
+                margin-bottom: 20px; /* Bottom margin */
+            }
+    
+            .product:hover {
+                box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+            }
+    
+            .product img {
+                max-width: 100%; /* Maximum width */
+                height: auto; /* Auto height */
+                margin-bottom: 10px; /* Bottom margin */
+            }
+    
+            .product h2 {
+                font-size: 18px; /* Heading font size */
+                margin-bottom: 10px; /* Bottom margin */
+                color: #333; /* Dark gray text color */
+            }
+    
+            .product p {
+                font-size: 14px; /* Paragraph font size */
+                margin-bottom: 10px; /* Bottom margin */
+                color: #666; /* Medium gray text color */
+            }
+    
+            /* Button container styles */
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Add category buttons -->
+        <div class="container">
+            <button class="category-button" onclick="filterProducts('AYURVEDIC')">AYURVEDIC ARISHTAS & ASAVAS</button>
+            <button class="category-button" onclick="filterProducts('HOMEOPATHIC')">HOMEOPATHIC REMEDIES</button>
+            <button class="category-button" onclick="filterProducts('AYURVEDIC POWDERS')">AYURVEDIC CHOORNAS & POWDERS</button>
+        </div>
+    
+        <div class="container">
+    
+        {% for product in products %}
+        <div class="product" data-category="{{ product.category }}">
+            <img src="{{ product.product_image.url }}" alt="{{ product.name }}">
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>Price: ₹{{ product.price }}</p>
+            <!-- Button container for Add to Cart and Buy Now buttons -->
+            <div class="button-container">
+                {% if product.quantity_available == "0" %}
+                    <span><a href="" class="btn btn-warning">OUT OF STOCK</a></span>
+                {% else %}
+                   <a href="/user_add_product_to_carts1/{{product.id}}/{{ product.name }}/{{product.price}}/{{product.quantity_available}}" class="btn btn-outline-success btn-sm">AddToCart</a>
+                {%endif%}
+                {% comment %} <form action="{% url 'add-to-cart' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="add-to-cart-btn">Add to Cart</button>
+                </form>
+                <form action="{% url 'checkout' product.id %}" method="post">
+                    {% csrf_token %}
+                    <button class="buy-now-btn">Buy Now</button>
+                </form> {% endcomment %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        function filterProducts(category) {
+            // Hide all products
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                product.style.display = 'none';
+            });
+
+            // Show products with selected category
+            const filteredProducts = document.querySelectorAll(`.product[data-category="${category}"]`);
+            filteredProducts.forEach(product => {
+                product.style.display = 'block';
+            });
+        }
+    </script>
+</body>
+</html>

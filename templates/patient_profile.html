@@ -1,0 +1,216 @@
+{% include 'user_header.html' %}
+
+<form method="POST" action="" onsubmit="return validateForm()">
+    {% if patient_up %}
+
+
+
+    <!-- Start Banner Hero -->
+    <section class="bg-light w-100">
+        <div class="container">
+            <div class="row d-flex align-items-center py-5">
+                <div class="col-lg-6 text-start">
+                  <h2 class="h2 py-5 text-primary typo-space-line">EDIT PROFILE</h2>
+                  <input type="text" placeholder="Fullname" style="width: 550px;" name="fullName"  class="form-control" id="fullName" value={{patient_up.FullName}} oninput="validateFullName()" required>
+                    <span id="fullNameError" class="error"></span>
+                    <br>
+                    <input type="email" placeholder="Email" style="width: 550px;" name="email"  class="form-control" id="email" value={{patient_up.email}} class="input-box" oninput="validateEmail()" required>
+                    <span id="emailError" class="error"></span>
+                    <br>
+                    <input type="tel" placeholder="Place" style="width: 550px;" name="place"  class="form-control" id="place"  value={{patient_up.Place}} class="input-box" oninput="validatePlace()" required>
+                    <span id="placeError" class="error"></span>
+                    <br>
+                    <input type="tel" placeholder="Phone" style="width: 550px;" name="phone"  class="form-control" id="phone" value={{patient_up.phone}} class="input-box" oninput="validatePhone()" required>
+                    <span id="phoneError" class="error"></span>
+                    <br>
+                    <input type="age" placeholder="Age" style="width: 550px;" name="age"  class="form-control" id="age" value={{patient_up.Age}} class="input-box" oninput="validateAge()" required>
+                    <span id="AgeError" class="error"></span>
+                    <br>
+                    <div style="width: 550px;">
+                    <select placeholder="Gender" id="gender"  class="form-control" required name='genderxxx'value={{patient_up.genderxxx}}>
+                        <option value="other" >Gender</option>
+                        <option value="male" >Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                    <br>
+                    <input type="password" placeholder="Password" style="width: 550px;" class="form-control" name="password" id="password" oninput="validatePassword()" required>
+                    <span id="passwordError" class="error"></span>
+                    <br>
+                    <input type="password" style="width: 550px;" placeholder="Confirm Password"class="form-control" name="confirmPassword" oninput="validateConfirmPassword()">
+                    <span id="confirmPasswordError" class="error"></span>
+                    <br>
+
+                    
+
+
+
+                   <a href="{% url "login_fun_page" %}"><button class="btn btn-success" Input type="submit">Update</button></a><br>
+                  <!--  <p>Already have an account?  <a href="{% url 'login_fun_page' %}">Login</a></p>
+           
+                    <p class="forgot-password"><a  href="">Forgot Password?</a></p><br>-->
+
+
+                 <p class="light-300">
+                    
+                        {% comment %} Vector illustration credit goes to <a rel="nofollow" href="http://freepik.com/" target="_blank">FreePik</a> website. Purple Buzz is provided by TemplateMo. Lorem ipsum dolor sit amet, consectetur. {% endcomment %}
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/static/assets1/img/work.svg">
+                </div>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!-- End Banner Hero -->
+  
+                
+
+
+
+  
+                        
+      
+</form>
+
+<!-- End Choice -->
+    {% include 'footer.html'%}
+
+
+
+
+{% comment %} 
+   <form method="POST" action="" onsubmit="return validateForm()">
+
+
+                       <!-- Start Banner Hero -->
+    <section class="bg-light w-100">
+      <div class="container">
+          <div class="row d-flex align-items-center py-5">
+              <div class="col-lg-6 text-start">
+                <h2 class="h2 py-5 text-primary typo-space-line">PATIENT REGISTRATION</h2>
+               
+   
+        {% csrf_token %}
+    
+                    <div class="input-container">
+                        <input type="text" placeholder="Fullname" name="fullName" id="fullName" oninput="validateFullName()" required>
+                        <span id="fullNameError" class="error"></span>
+                        <br>
+                        <input type="email" placeholder="Email" name="email" id="email" class="input-box" oninput="validateEmail()" required>
+                        <span id="emailError" class="error"></span>
+                        <br>
+                        <input type="tel" placeholder="Place" name="place" id="place" class="input-box" oninput="validatePlace()" required>
+                        <span id="placeError" class="error"></span>
+                        <br>
+                        <input type="tel" placeholder="Phone" name="phone" id="phone" class="input-box" oninput="validatePhone()" required>
+                        <span id="phoneError" class="error"></span>
+                        <br>
+                        <input type="age" placeholder="Age" name="age" id="age" class="input-box" oninput="validateAge()" required>
+                        <span id="AgeError" class="error"></span>
+                        <br>
+                        <div style="width: 550px;padding-left: 30px;">
+                        <select placeholder="Gender" id="gender"  class="form-control" required name='genderxxx'>
+                            <option value="other" >Gender</option>
+                            <option value="male" >Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                        <br>
+                        <input type="password" placeholder="Password" name="password" id="password" oninput="validatePassword()" required>
+                        <span id="passwordError" class="error"></span>
+                        <br>
+                        <input type="password" placeholder="Confirm Password" name="confirmPassword" oninput="validateConfirmPassword()">
+                        <span id="confirmPasswordError" class="error"></span>
+                        <br>
+                        <a href="{% url "login_fun_page" %}"><button type="submit">REGISTER</button></a><br>
+                        <p>Already have an account?  <a href="{% url 'login_fun_page' %}">Login</a></p>
+               
+                        <p class="forgot-password"><a href="">Forgot Password?</a></p><br>
+
+
+                        <p class="light-300">
+                           
+                               {% comment %} Vector illustration credit goes to <a rel="nofollow" href="http://freepik.com/" target="_blank">FreePik</a> website. Purple Buzz is provided by TemplateMo. Lorem ipsum dolor sit amet, consectetur. {% endcomment %}
+         
+
+    <script>
+        // JavaScript validation functions
+
+        // Fullname validation
+        function validateFullName() {
+            const fullNameInput = document.getElementById('fullName');
+            const fullNameError = document.getElementById('fullNameError');
+           const fullNamePattern = /^[A-Z][a-z]*$/;
+
+            if (!fullNamePattern.test(fullNameInput.value)) {
+                fullNameError.textContent = 'Fullname must start with an uppercase letter and contain only letters.';
+           } else {
+                fullNameError.textContent = '';
+            }
+          }
+       
+
+
+        // Email validation
+        function validateEmail() {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+
+            if (!emailPattern.test(emailInput.value)) {
+                emailError.textContent = 'Invalid email format.';
+            } else {
+                emailError.textContent = '';
+            }
+        }
+
+        // Phone validation
+        function validatePhone() {
+            const phoneInput = document.getElementById('phone');
+            const phoneError = document.getElementById('phoneError');
+            const phonePattern = /^[1-9]\d{9}$/;
+
+            if (!phonePattern.test(phoneInput.value)) {
+                phoneError.textContent = 'Phone number must be 10 digits and cannot start with 0.';
+            } else {
+                phoneError.textContent = '';
+            }
+        }
+
+        // Password validation
+        function validatePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                passwordError.textContent = 'Password must contain at least one uppercase letter, one digit, and one special character (!@#$%^&*).';
+            } else {
+                passwordError.textContent = '';
+            }
+        }
+
+        // Confirm Password validation
+        function validateConfirmPassword() {
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                confirmPasswordError.textContent = 'Passwords do not match.';
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+        }
+
+        // Form submission validation
+        function validateForm() {
+            // You can add additional validation logic here if needed
+            // For example, check if all error messages are empty before submitting
+            return true; // Return true to allow form submission or false to prevent it
+        }
+    </script>
+        
+    {% include 'footer.html' %}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product Category</title>
+    <style>
+        /* Your CSS styles */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Product Category</h1>
+        <form id="add-category-form" action="{% url 'sub_category' %}" method="post">
+            {% csrf_token %}
+            <div class="add-category-container">
+                <div class="form-group">
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter category name" required>
+                </div>
+                <button type="submit" id="add-category-button">Add Category</button>
+            </div>
+            <p class="error-message" id="categoryError"></p>
+        </form>
+        <h2>Existing Categories</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Action</th> <!-- New column for the delete button -->
+                </tr>
+            </thead>
+            <tbody id="category-list">
+                <!-- JavaScript will populate this section -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

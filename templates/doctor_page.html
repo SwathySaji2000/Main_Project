@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% include 'doctor_header.html' %}
+<html>
+<head>
+    <title>Doctor's Page</title>
+    <!-- Bootstrap CSS CDN link (adjust the version as needed) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS if needed */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="col-md-6 m-auto h2 semi-bold-600 py-5 text-center">Appointments</h1>
+        
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th> Name</th>
+                        <th>Email</th>
+                        <th>Date of Booking</th>
+                        <th>Status</th>
+                        <th>Add Prescription</th>
+                        <!-- Add more table headers as needed -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.USER.FullName }}</td>
+                        <td>{{ booking.USER.email}}</td>
+                        <td>{{ booking.dateofbooking }}</td>
+                        <td>{{ booking.Status }}</td> 
+                        <!-- <td>{{ booking.prescription }}</td> -->
+                        <!-- Add more table cells for other details -->
+                        <td><a href="/prescription/{{booking.id}}" class="btn btn-primary">Prescription</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery CDN links (optional, if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+{% include 'footer.html' %}

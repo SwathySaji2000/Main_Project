@@ -1,0 +1,165 @@
+<!-- admin_view_bookings.html -->
+{% include 'admin_header.html' %}
+<style>
+    .center-align {
+        text-align: center;
+        margin-left: 300px;
+    }
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* Add CSS for table */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    /* Add CSS for action buttons */
+    .action-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-edit {
+        background-color: #ffc107;
+        color: #000;
+        border: 1px solid #ffc107;
+    }
+
+    .btn-edit:hover {
+        background-color: #ffca2c;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: #fff;
+        border: 1px solid #dc3545;
+    }
+
+    .btn-delete:hover {
+        background-color: #e4606d;
+    }
+</style>
+
+<div class="center-align">
+    <div class="card" style="width: 1200px;">
+        <h2> View Bookings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room</th>
+                    <th>Date Start</th>
+                    <th>End Date</th>
+                    <th>Treatment Type</th>
+                    <th>Food Plan</th>
+                    <th>Number of Days</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.room.room_type }}</td>
+                    <td>{{ booking.date_start }}</td>
+                    <td>{{ booking.end_date }}</td>
+                    <td>{{ booking.treatment_type }}</td>
+                    <td>{{ booking.food_plan }}</td>
+                    <td>{{ booking.number_of_days }}</td>
+                    <td>{{ booking.status }}</td>
+                    <td class="action-buttons">
+                        <td class="action-buttons">
+                            <button onclick="confirmApprove({{ booking.id }})" class="btn btn-success">Approve</button>
+                            <button onclick="confirmDelete({{ booking.id }})" class="btn btn-delete">Delete</button>
+                        </td>
+                        
+                    </td>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Script for deleting booking -->
+<script>
+    function deleteBooking(bookingId) {
+        // Send a request to delete the booking
+        fetch(`/delete_booking/${bookingId}`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Remove the booking row from the table if deletion is successful
+                document.getElementById(`booking-row-${bookingId}`).remove();
+            }
+        })
+        .catch(error => console.error('Error deleting booking:', error));
+    }
+    function approveTreatment(bookingId) {
+        console.log('Approve button clicked for booking ID:', bookingId);
+        if (confirm("Are you sure you want to approve this treatment?")) {
+            fetch(`/approve_booking/{{ user_id }}/${bookingId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to approve treatment.');
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('Treatment approved successfully.');
+                    // Optionally, you can remove the booking row from the table here
+                } else {
+                    throw new Error('Failed to approve treatment.'); // This line is optional
+                }
+            })
+            .catch(error => {
+                console.error('Error approving treatment:', error.message);
+                // Handle the error, e.g., display an error message to the user
+                alert('Failed to approve treatment. Please try again later.');
+            });
+        }
+    }
+    
+        
+   
+</script>
+
+    

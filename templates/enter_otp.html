@@ -1,0 +1,58 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title>OTP</title>
+
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Kumbh+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="/static/forgot/css/style.css" type="text/css" media="all" />
+
+</head>
+
+<body>
+    <div class="signinform">
+        <h1>Enter OTP</h1>
+        <!-- container -->
+        <div class="container">
+            <!-- main content -->
+            <div class="w3l-form-info">
+                <div class="w3_info">
+
+                    <form action="#" method="post">
+                        {%csrf_token%}
+                        <div class="input-group">
+                            <span><i class="fas fa-user" aria-hidden="true"></i></span>
+                            <input type="number" placeholder="OTP" name="otp_v" required="">
+                        </div>
+                        <button class="btn btn-primary btn-block" name="et_otp" type="submit">Verify</button>
+                    </form>
+                    
+                    </div>
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- //container -->
+        <!-- footer -->
+
+        <!-- footer -->
+    </div>
+
+    <!-- fontawesome v5-->
+    <script src="/static/forgot/js/fontawesome.js"></script>
+
+</body>
+
+</html>

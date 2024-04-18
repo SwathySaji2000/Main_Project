@@ -1,0 +1,45 @@
+{% include 'user_header.html' %}
+
+<body>
+
+
+    <div class="container mt-5">
+        <h1 class="col-md-6 m-auto h2 semi-bold-600 py-5">VIEW  MY PRESCRIPTIONS</h1>
+
+        {% comment %} <h3 class="mb-4"></h3> {% endcomment %}
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <!-- <th>ID</th> -->
+                    <th>Medicine name</th>
+                    <th>Dosage</th>
+                    
+                
+               </tr>
+            </thead>
+            <tbody>
+                {% for ps in docviews %}
+                    <form method="post" >
+                        {% comment %} {% csrf_token %} {% endcomment %}
+                        <!-- <input type="hidden" name="schedule_id" value="{{ entry.id }}"> -->
+                
+                        <tr>
+                            <!-- <td>{{ entry.id }}</td> -->
+                            <td>{{ ps.medicine_name }}</td>
+                            <td>{{ ps.dosage }}</td>
+                            
+                       
+                            <td>
+
+                               <!--<a href="/a/{{entry.id}}" class="btn btn-warning">appointment</a>-->
+
+                            </td>
+                        </tr>
+                    </form>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% include 'footer.html' %}
+
+   

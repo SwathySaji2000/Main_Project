@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit/Delete Product</title>
+    <style>
+        /* Add your custom CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Adjust input box size including padding and border */
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .delete-form {
+            display: inline;
+        }
+        .delete-button {
+            background-color: #f44336;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit/Delete Product</h1>
+        <form method="post" action="{% url 'product_list' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Your edit form fields here -->
+            <!-- For simplicity, I'm just including the product name input field -->
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" required>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="seller">Seller:</label>
+                <select id="seller" name="seller" required>
+                    {% for seller in sellers %}
+                    <option value="{{ seller.id }}">{{ seller.Name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            
+            <div class="form-group">
+                <label for="subcategory">Subcategory:</label>
+                <select id="subcategory" name="subcategory" required>
+                    <option value="">Select subcategory</option>
+                    {% for subcategory in subcategories %}
+                        <option value="{{ subcategory.id }}">{{ subcategory.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="product name">Product Name:</label>
+                <input type="text" id="productname" name="productname" placeholder="Enter product name" required>
+            </div>
+            <div class="form-group">
+                <label for="product description">Product Description:</label>
+                <textarea id="productdescription" name="productdescription" placeholder="Enter product description" required></textarea>
+            </div> 
+            <div class="form-group">
+                <label for="product price">Product Price:</label>
+                <input type="number" id="productprice" name="productprice" placeholder="Enter product price" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="product discount">Product Discount:</label>
+                <input type="text" id="productdiscount" name="productdiscount" placeholder="Enter product discount" required>
+            </div>
+            <div class="form-group">
+                <label for="product quantityavailable">Product Quantity Available:</label>
+                <input type="number" id="productquantityavailable" name="productquantityavailable" placeholder="Enter quantity available" required>
+            </div>
+            <div class="form-group">
+                <!-- Add the product image field -->
+                <label for="product_image">Product Image:</label>
+                <input type="file" id="product_image" name="product_image" accept="image/*">
+            </div>
+            
+            <div class="form-group">
+                <label for="product ingredients">Product Ingredients:</label>
+                <textarea id="productingredients" name="productingredients" placeholder="Enter product ingredients"></textarea>
+            </div>
+           
+            <div class="form-group">
+                <label for="product usageinstructions">Product Usage Instructions:</label>
+                <textarea id="productusageinstructions" name="productusageinstructions" placeholder="Enter usage instructions"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="product certificate">Product Certificate:</label>
+                <input type="file" id="productcertificate" name="productcertificate" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="productexpirydate">Product Expiry Date:</label>
+                <input type="date" id="productexpirydate" name="productexpirydate" placeholder="Enter expiry date">
+            </div>
+            <div class="form-group">
+                <label for="product manufacturer">Product Manufacturer:</label>
+                <input type="text" id="productmanufacturer" name="productmanufacturer" placeholder="Enter manufacturer">
+            </div> 
+
+            <button type="submit">Save Changes</button>
+    
+</body>
+</html>

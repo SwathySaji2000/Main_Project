@@ -1,0 +1,332 @@
+
+{% include 'doctor_header.html' %}
+{% load static %}
+
+<body>
+    <form method="POST"  enctype="multipart/form-data" onsubmit="return validateForm()">
+        {% csrf_token %}
+        {% if doctor_up %}
+        
+        <style>
+
+            .image-container {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+        
+            .background-image {
+                /* Add any styles for the background image */
+            }
+
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+            
+            .profile-container {
+                background-color: #f9f9f9;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .input-group {
+                margin-bottom: 15px;
+            }
+            
+            .input-group label {
+                display: block;
+                font-weight: bold;
+            }
+            
+            .input-group input[type="text"],
+            .input-group input[type="email"],
+            .input-group input[type="tel"],
+            .input-group input[type="password"],
+            .input-group input[type="date"],
+            .input-group select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            
+            .input-group input[type="file"] {
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            
+            .input-group select {
+                padding: 10px;
+            }
+            
+            .input-group input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+                border-radius: 5px;
+            }
+            
+            .input-group input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+            
+            .error {
+                color: red;
+                font-size: 14px;
+            }
+            
+            h1 {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+        </style>
+        
+        <div class="right-side">
+            <div class="image-container">
+               <!--<img class="background-image" src="{% static 'images/lo.jpeg' %}" alt="Background Image">-->
+            </div>
+        </div>
+        <div class="login-container">
+            <div class="center-side">
+                <div class="form-container">
+                    <div class="title">
+                       
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Doctor Profile</title>
+                            <link rel="stylesheet" href="{% static 'styles.css' %}">
+                        </head>
+                        <body>
+                            <form method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                {% csrf_token %}
+                                {% if doctor_up %}
+                                <div class="container">
+                                    <div class="profile-container">
+                                       
+
+                                        <h1>Edit Profile</h1>
+                                        <div class="input-group">
+                                            <label for="Name">Name:</label>
+                                            <input type="text" id="Name" name="Name" value="{{ doctor_up.Name }}" oninput="validateName()" required>
+                                            <span id="NameError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="place">Place:</label>
+                                            <input type="text" id="place" name="place" value="{{ doctor_up.place }}" oninput="validatePlace()" required>
+                                            <span id="placeError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="DOB">DOB:</label>
+                                            <input type="date" id="DOB" name="DOB" value="{{ doctor_up.DOB }}" oninput="validateDOB()" required>
+                                            <span id="DOBError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="phone">Phone:</label>
+                                            <input type="tel" id="phone" name="phone" value="{{ doctor_up.phone }}" oninput="validatePhone()" required>
+                                            <span id="phoneError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="email">Email:</label>
+                                            <input type="email" id="email" name="email" value="{{ doctor_up.email }}" oninput="validateemail()" required>
+                                            <span id="emailError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="specialization">Specialization:</label>
+                                            <input type="text" id="specialization" name="specialization" value="{{ doctor_up.specialization }}" oninput="validatespecialization()" required>
+                                            <span id="specializationError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="age">Age:</label>
+                                            <input type="text" id="age" name="age" value="{{ doctor_up.age }}" oninput="validateAge()" required>
+                                            <span id="AgeError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="gender">Gender:</label>
+                                            <select id="gender" name="gender" required>
+                                                <option value="other">Other</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="picture">Profile Picture:</label>
+                                            <input type="file" id="picture" name="picture" class="input-box">
+                                        </div>
+                                        <div class="input-group">
+                                            <label for="password">Password:</label>
+                                            <input type="password" id="password" name="password" oninput="validatePassword()" required>
+                                            <span id="passwordError" class="error"></span>
+                                        </div>
+                                        <div class="input-group">
+                                            <input type="submit" value="Apply Changes">
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </form>
+                            <script src="script.js"></script>
+                        </body>
+                        </html>
+                        
+
+
+
+                    </form>
+                        <!--input type="password" placeholder="Confirm Password" name="confirmPassword" oninput="validateConfirmPassword()">
+                        <span id="confirmPasswordError" class="error"></span>
+                        <br>-->
+                        <!--<a href="{% url "login_fun_page" %}"><button type="submit">REGISTER</button></a><br>
+                        <p>Already have an account? <a href="{% url 'login_fun_page' %}">Login</a></p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </form>
+    <script>
+        // JavaScript validation functions
+
+        // Fullname validation
+          function validateName() {
+            var NameInput = document.getElementById("Name");
+            var NameValue = NameInput.value;
+
+            // Regular expression to validate the name
+            var NamePattern = /^[A-Z][a-zA-Z]*$/;
+
+            if (!NamePattern.test(NameValue)) {
+                alert("Name must start with a capital letter and contain only alphabets.");
+                NameameInput.value = "";  // Clear the input field
+                NameInput.focus();     // Set focus back to the input field
+                return false;
+            }
+
+            // Name validation successful
+            return true;
+        }
+        // Email validation
+       
+        function validateemail() {
+          var emailInput = document.getElementById("email");
+          var emailValue = emailInput.value;
+
+          // Regular expression to validate the email
+          var emailPattern = /^[a-z][a-zA-Z0-9.@]*$/;
+
+          if (!emailPattern.test(emailValue)) {
+              alert("Email must start with a small letter and contain only alphabets, numbers, '.', '@'. No spaces or special characters are allowed.");
+              emailInput.value = "";  // Clear the input field
+              emailInput.focus();     // Set focus back to the input field
+              return false;
+          }
+
+          // Email validation successful
+          return true;
+      }
+      function validatespecialization() {
+        var specializationInput = document.getElementById("specialization");
+        var specializationValue = specializationInput.value;
+
+        // Regular expression to validate the specialization
+        var specializationPattern = /^[A-Z][a-zA-Z]*$/;
+
+        if (!specializationPattern.test(specializationValue)) {
+            alert("Specialization must start with a capital letter and contain only alphabets. No spaces, numbers, or special characters are allowed.");
+            specializationInput.value = "";  // Clear the input field
+            specializationInput.focus();     // Set focus back to the input field
+            return false;
+        }
+
+        // Specialization validation successful
+        return true;
+    }
+        function validateAge() {
+            var ageInput = document.getElementById("age");
+            var ageValue = ageInput.value;
+
+            // Regular expression to match only numbers
+            var numbersOnly = /^[0-9]+$/;
+
+            if (!numbersOnly.test(ageValue)) {
+                alert("Age must contain only numbers.");
+                ageInput.value = "";  // Clear the input field
+                ageInput.focus();     // Set focus back to the input field
+                return false;
+            }
+
+            // Age validation successful
+            return true;
+        }
+
+        // Phone validation
+        function validatePhone() {
+          var phoneInput = document.getElementById("phone");
+          var phoneValue = phoneInput.value;
+
+          // Regular expression to validate the phone number
+          var phonePattern = /^[1-9]\d{0,9}$/;
+
+          if (!phonePattern.test(phoneValue)) {
+              alert("Phone number must be a number, not more than 10 digits, and the first digit must not be 0. No other characters, alphabets, symbols, or spaces are allowed.");
+              phoneInput.value = "";  // Clear the input field
+              phoneInput.focus();     // Set focus back to the input field
+              return false;
+          }
+
+          // Phone number validation successful
+          return true;
+      }
+        // Password validation
+        function validatePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordError = document.getElementById('passwordError');
+            const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+            if (!passwordPattern.test(passwordInput.value)) {
+                passwordError.textContent = 'Password must contain at least one uppercase letter, one digit, and one special character (!@#$%^&*).';
+            } else {
+                passwordError.textContent = '';
+            }
+        }
+        function validatePlace() {
+          var placeInput = document.getElementById("place");
+          var placeValue = placeInput.value;
+
+          // Regular expression to validate the place
+          var placePattern = /^[a-zA-Z]*$/;
+
+          if (!placePattern.test(placeValue)) {
+              alert("Place must contain only alphabets.");
+              placeInput.value = "";  // Clear the input field
+              placeInput.focus();     // Set focus back to the input field
+              return false;
+          }
+
+          // Place validation successful
+          return true;
+      }
+
+        // Form submission validation
+        function validateForm() {
+            // You can add additional validation logic here if needed
+            // For example, check if all error messages are empty before submitting
+            return true; // Return true to allow form submission or false to prevent it
+        }
+    </script>
+        
+</body>
+</html>
+
+
+
+

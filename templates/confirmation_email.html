@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation Email</title>
+</head>
+<body>
+    <p>Dear user,</p>
+    
+    <p>Your treatment booking has been confirmed:</p>
+    
+    <ul>
+        <li>Room: {{ room }}</li>
+        <li>Date Start: {{ date_start }}</li>
+        <li>End Date: {{ end_date }}</li>
+        <li>Treatment Type: {{ treatment_type }}</li>
+        <li>Food Plan: {{ food_plan }}</li>
+        <li>Number of Days: {{ number_of_days }}</li>
+    </ul>
+    
+    <p>Thank you for booking with us!</p>
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+<!-- payment.html -->
+
+<button id="rzp-button">Pay with Razorpay</button>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    document.getElementById('rzp-button').onclick = function(e) {
+        fetch('/generate_order/', {method: 'POST'})
+        .then(response => response.json())
+        .then(data => {
+            var options = {
+                "key": "<YOUR_RAZORPAY_KEY_ID>",
+                "amount": data.order_id,
+                "currency": "INR",
+                "name": "Herbal",
+                "description": "Payment Description",
+                "order_id": data.order_id,
+                "handler": function(response) {
+                    // Redirect to payment_success page on successful payment
+                    window.location.href = '/payment_success/';
+                },
+                "prefill": {
+                    "name": "Your Name",
+                    "email": "your@email.com",
+                    "contact": "9999999999"
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        });
+    }
+</script>
+
